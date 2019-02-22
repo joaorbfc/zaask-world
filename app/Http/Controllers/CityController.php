@@ -24,12 +24,12 @@ class CityController extends Controller
             return response()->json([
                 'success' => false,
                 'Message'=>'City not found'
-            ]);
+            ], 404);
         }
         return response()->json([
             'success' => true,
             'Message'=>'City successfully deleted'
-        ]);
+        ], 204);
     }
 
     public function addCity(Request $request){
@@ -44,7 +44,7 @@ class CityController extends Controller
             return response()->json([
                 'success' => false,
                 'Message'=>'Invalid data'
-            ]);
+            ], 400);
         }else{
             $city = City::create($request->all());
         }
@@ -54,12 +54,12 @@ class CityController extends Controller
             return response()->json([
                 'success' => true,
                 'Message'=>'City successfully created'
-            ]);
+            ], 201);
         }else{
             return response()->json([
                 'success' => false,
                 'Message'=>'City not found'
-            ]);
+            ], 404);
         }
     }
 }
