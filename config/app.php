@@ -135,6 +135,7 @@ return [
     */
 
     'providers' => [
+        Reliese\Coders\CodersServiceProvider::class,
 
         /*
          * Laravel Framework Service Providers...
