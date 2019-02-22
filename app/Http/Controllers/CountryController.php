@@ -23,18 +23,19 @@ class CountryController extends Controller
         $validation = Validator::make($request->all(),[
             'HeadOfState'=>'required'
         ]);
-        if($validation->fails()){
-            return response()->json([
-                'success' => false,
-                'Message'=>'Invalid data'
-            ]);
-        }else{
-            $country->HeadOfState = $request->HeadOfState;
-            $country->save();
-            return response()->json([
-                'success' => true,
-                'Message'=>'Updated successfully'
-            ]);
+        if(!$validation->fails()){
+            if($request->HeadOfState !== ''){
+                $country->HeadOfState = $request->HeadOfState;
+                $country->save();
+                return response()->json([
+                    'success' => true,
+                    'Message'=>'Updated successfully'
+                ]);
+            }
         }
+        return response()->json([
+            'success' => false,
+            'Message'=>'Invalid data'
+        ], 400);
     }
 }
