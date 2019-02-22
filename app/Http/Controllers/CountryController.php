@@ -10,12 +10,23 @@ use Illuminate\Support\Facades\Validator;
 class CountryController extends Controller
 {
     public function getCountryByCode($code){
-       $lang = Countrylanguage::where('CountryCode','=', $code)->get();
+        $langs = Countrylanguage::where('CountryCode','=', $code)->get();
+
+       for($i = 0 ; $i < count($langs) ; $i++){
+           $tmp = $langs[$i];
+           $langs[$i] = [
+               $tmp->Language => [
+                'isOficial' => $tmp->IsOfficial === 'F' ? false : true,
+                'percentage' => $tmp->Percentage
+               ]
+               ];
+       }
+
         $country = Country::findOrFail($code);
-        return response()->json([
-            'Country' => $country,
-            'Lang' => $lang
-        ]);
+
+        return response(view('country', ['country' => $country, 'langs' => $langs]), 
+        200, 
+        ['Content-Type' => 'application/json']);
     }
 
     public function updateHS(Request $request, $code){
