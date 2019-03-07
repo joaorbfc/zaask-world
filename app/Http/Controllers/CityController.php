@@ -11,15 +11,15 @@ class CityController extends Controller
     public function getCities($code){
         $cities = City::where('CountryCode', $code)->get();
 
-       for($i = 0 ; $i < count($cities) ; $i++){
-        $tmp = $cities[$i];
-        $cities[$i] = [
-                'cityName' => $tmp->Name,
-                'countryCode' => $tmp->CountryCode,
-                'district' => $tmp->District,
-                'Population' => $tmp->Population
-            ];
-        }
+    //    for($i = 0 ; $i < count($cities) ; $i++){
+    //     $tmp = $cities[$i];
+    //     $cities[$i] = [
+    //             'cityName' => $tmp->Name,
+    //             'countryCode' => $tmp->CountryCode,
+    //             'district' => $tmp->District,
+    //             'Population' => $tmp->Population
+    //         ];
+    //     }
         return $cities;
     }
 

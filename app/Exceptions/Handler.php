@@ -56,15 +56,16 @@ class Handler extends ExceptionHandler
             return response()->json($response, 404);
         }
 
-        $status = 400;
+        // $status = 400;
 
-        if ($this->isHttpException($exception)) {
-            $status = $exception->getStatusCode();
-            if($status !== 404) $response = [
-                'success' => false,
-                'Message' => 'Something went wrong.'
-            ] ;
-        }
-        return response()->json($response, $status);
+        // if ($this->isHttpException($exception)) {
+        //     $status = $exception->getStatusCode();
+        //     if($status !== 404) $response = [
+        //         'success' => false,
+        //         'Message' => 'Something went wrong.'
+        //     ] ;
+        // }
+        // return response()->json($response, $status);
+        return parent::render($request, $exception);
     }
 }
